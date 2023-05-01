@@ -63,6 +63,10 @@
       background: black;
       position: absolute;
       top: 50%;
+      transform-origin: 100%; /* Enables movement of clockhand anchored to middle of clock*/
+      transform: rotate(90deg); /* Rotates second hands by default 90 degrees */
+      transition: all 0.05s; 
+      transition-timing-function: cubic-bezier(0.08, 3.38, 0.58, 1); /* Adds a cool effect when second hands move.*/
     }
 
 
@@ -70,8 +74,18 @@
   </style>
 
   <script>
+  const secondHand = document.querySelector('.second-hand');
 
-//test
+    function setDate(){
+      const now = new Date();
+      const seconds = now.getSeconds();
+      const secondsDegrees = ((seconds / 60) * 360);
+      secondHand.style.transform = `rotate(${secondsDegrees}deg)`;
+
+    }
+
+
+  setInterval(setDate, 1000);
   </script>
 </body>
 </html>
